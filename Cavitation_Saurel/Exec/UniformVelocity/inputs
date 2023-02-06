@@ -1,0 +1,255 @@
+# ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 20000
+# fab.init_snan = 1
+
+# amrex.fpe_trap_invalid = 1
+# amrex.fpe_trap_zero = 1
+# amrex.fpe_trap_overflow = 1
+# amrex.throw_exception = 0
+
+# PROBLEM SIZE & GEOMETRY
+# NOTE - although this example is 2D, 3D data can be specified safely; the z-components are ignored
+geometry.is_periodic =  0  0  0               # Boolean flag for periodic boundaries all round
+geometry.coord_sys   =  0                     # 0 -> Cartesian geometry
+geometry.prob_lo     =  0.0   -0.0002   0.0         # Physical minimum extents
+
+# # Test 3
+# geometry.prob_hi     =  1.0  1.0  1.0         # Physical maximum extents
+# amr.n_cell           =  48   48   2          # Number of cells in each dimension
+
+# # Test 4
+# geometry.prob_hi     =  3.0  1.0  1.0         # Physical maximum extents
+# amr.n_cell           =  192   96   2          # Number of cells in each dimension
+
+# Test 5
+geometry.prob_hi     = 0.0004  0.0002  1.0         # Physical maximum extents
+amr.n_cell           = 400  400   2          # Number of cells in each dimension
+
+# # Test 7
+# geometry.prob_hi     =  0.325  0.089  1.0         # Physical maximum extents
+# amr.n_cell           =  96  288   2          # Number of cells in each dimension
+
+# TIME STEP CONTROL
+adv.cfl            = 0.1     # cfl number for hyperbolic system
+
+# CONSTANT FOR SLOPE RECONSTRUCTION
+adv.sl_const       = 0
+
+# VERBOSITY - controls the number of messages output to screen
+adv.v              = 1       # verbosity in Adv
+amr.v              = 1       # verbosity in Amr (recommended, else progres of code is not output)
+
+# REFINEMENT / REGRIDDING
+amr.max_level       = 0       # maximum level number allowed
+amr.ref_ratio       = 2 2 2 2 # refinement ratio
+amr.regrid_int      = 1       # how often to regrid (number of coarse timesteps between regrid)
+amr.blocking_factor = 2       # block factor in grid generation
+amr.max_grid_size   = 96
+
+# CHECKPOINT FILES
+amr.checkpoint_files_output = 0     # 0 will disable checkpoint files
+amr.check_file              = chk   # root name of checkpoint file
+amr.check_int               = 10    # number of timesteps between checkpoints
+
+# PLOTFILES
+# NOTE - VisIt (recommended), Paraview or amrvis are needed to visualise data.  AMReX outputs boxlib format
+#        data; see lab CAMReX wiki for instructions on plotting.  Using a base name of plt ensures
+#	 visualisation knows the current cycle (iteration) as well as time - see AMReX documentation for more.
+amr.plot_files_output = 1                # 0 will disable plot files
+amr.plot_file         = test/plt    # root name of plot file
+amr.plot_int          = 1               # number of timesteps between plot files, plot_per allows fixed timesteps
+
+# PROBIN FILENAME - This file contains AMR refinement criteria
+amr.probin_file = probin
+
+# Test 1: advection of an interface in a uniform pressure and velocity flow
+
+    # # material specific data 
+    #   adv.gamma_a            = 4.4
+    #   adv.pinf_a             = 6e8 
+    #   adv.gamma_b            = 1.4 
+    #   adv.pinf_b             = 0 
+
+    # # left initial data
+    #   alpha_al           = 0.9999999
+    #   rho_al             = 1000
+    #   rho_bl             = 10 
+    #   vx_l               = 100 
+    #   p_l                = 1e5
+
+    # # right initial data
+    #   alpha_ar           = 1e-8
+    #   rho_ar             = 1000.0
+    #   rho_br             = 10.0
+    #   vx_r               = 100.0
+    #   p_r                = 1e5
+
+    # # simulation time
+    #   stop_time = 2.79e-3
+
+# # Test 2: Modified Sod test
+
+#     # material specific data 
+#     adv.gamma_a            = 1.4
+#     adv.pinf_a             = 0 
+#     adv.gamma_b            = 1.4 
+#     adv.pinf_b             = 0 
+
+#     # left initial data
+#     alpha_al           = 0.999999
+#     rho_al             = 1.0
+#     rho_bl             = 0.125 
+#     vx_l               = 0.0
+#     p_l                = 1.0
+#     vy_l               = 0.0
+
+#     # right initial data
+#     alpha_ar           = 1.0e-6
+#     rho_ar             = 1.0
+#     rho_br             = 0.125
+#     vx_r               = 0.0
+#     p_r                = 0.1
+#     vy_r               = 0.0
+
+#     # simulation time
+#     stop_time = 0.25
+
+# # Test 3: Cavitation test (tried lower cfl, density of air = 10 but results still not stable)
+
+#     # material specific data 
+#     adv.gamma_a            = 4.4
+#     adv.pinf_a             = 6e8
+#     adv.gamma_b            = 1.4 
+#     adv.pinf_b             = 0 
+
+#     # left initial data
+#     alpha_al           = 0.99
+#     rho_al             = 1000.0
+#     rho_bl             = 1.0
+#     vx_l               = -100.0
+#     vy_l               = 0.0
+#     p_l                = 1e5
+
+#     # right initial data
+#     alpha_ar           = 0.99
+#     rho_ar             = 1000.0
+#     rho_br             = 1.0
+#     vx_r               = 100.0
+#     vy_r               = 0.0
+#     p_r                = 1e5
+
+#     # simulation time
+#     stop_time = 1.85e-3
+
+# # Test 4: 2-D Richtmyer-Meshkov instability
+
+#     # material specific data 
+#     adv.gamma_a            = 4.4
+#     adv.pinf_a             = 6e8 
+#     adv.gamma_b            = 1.8 
+#     adv.pinf_b             = 0 
+
+#     # left initial data
+#     alpha_al           = 0.999999 # water
+#     rho_al             = 1000
+#     rho_bl             = 100
+#     vx_l               = -200 
+#     vy_l               = 0.0
+#     p_l                = 1.01325e5
+
+#     # right initial data
+#     alpha_ar           = 1e-6 # air
+#     rho_ar             = 1000
+#     rho_br             = 100
+#     vx_r               = -200
+#     vy_r               = 0.0
+#     p_r                = 1.01325e5
+
+#     # simulation time
+#     stop_time = 8.6e-3
+
+# Test 5: 2-D water droplet interacting with solid wall
+
+    # material specific data 
+    adv.gamma_a            = 4.4
+    adv.pinf_a             = 6.0e8 
+    adv.gamma_b            = 1.4 
+    adv.pinf_b             = 0.0
+
+    # left initial data (water droplet)
+    alpha_al           = 0.999999 
+    rho_al             = 1000.0
+    rho_bl             = 1.0
+    vx_l               = 0.0
+    vy_l               = -200.0
+    p_l                = 1.1e5
+
+    # right initial data (surrounding air)
+    alpha_ar           = 1.0e-6 
+    rho_ar             = 1000.0
+    rho_br             = 1.0
+    vx_r               = 0.0
+    vy_r               = 0.0
+    p_r                = 1.01325e5
+
+    # simulation time
+    stop_time = 10e-6
+
+# Test 6: 2-D single material shock test
+
+    # # material specific data 
+    # adv.gamma_a            = 4.4
+    # adv.pinf_a             = 6e8 
+    # adv.gamma_b            = 4.4 
+    # adv.pinf_b             = 6e8 
+
+    # # left initial data
+    # alpha_al           = 0.999999 # water
+    # rho_al             = 1000
+    # rho_bl             = 100
+    # vx_l               = 0 
+    # vy_l               = 0.0
+    # p_l                = 1.01325e5
+
+    # # right initial data
+    # alpha_ar           = 0.999999 # air
+    # rho_ar             = 1000
+    # rho_br             = 100
+    # vx_r               = -200
+    # vy_r               = 0.0
+    # p_r                = 1.01325e5
+
+    # # simulation time
+    # stop_time = 2e-3
+
+# # Test 7: helium bubble shock test
+
+#     # material specific data 
+#     adv.gamma_a            = 1.4 # air
+#     adv.pinf_a             = 0.0 # air
+#     adv.gamma_b            = 1.67 # helium 
+#     adv.pinf_b             = 0.0 # helium
+
+#     # left initial data (pre-shocked air)
+#     alpha_al           = 0.999999
+#     rho_al             = 1.0
+#     rho_bl             = 0.138
+#     vx_l               = 0.0
+#     vy_l               = 0.0
+#     p_l                = 1.0
+
+#     # right initial data (helium bubble)
+#     alpha_ar           = 1e-6
+#     rho_ar             = 1.0
+#     rho_br             = 0.138
+#     vx_r               = 0.0
+#     vy_r               = 0.0
+#     p_r                = 1.0
+
+#     # simulation time
+#     stop_time = 427e-3
+
+
+
+
+

@@ -1,0 +1,5 @@
+CEXE_sources += hllc.cpp AmrLevelAdv.cpp LevelBldAdv.cpp main.cpp eos_v2.cpp CNS_bcfill.cpp
+
+CEXE_headers += hllc.H AmrLevelAdv.H eos_v2.H 
+
+FEXE_headers += Adv_F.H

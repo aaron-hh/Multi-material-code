@@ -1,0 +1,24 @@
+ 0: amrex::BLBackTrace::print_backtrace_info(__sFILE*) (in main2d.gnu.ex) (AMReX_BLBackTrace.cpp:175)
+
+ 1: amrex::BLBackTrace::handler(int) (in main2d.gnu.ex) (AMReX_BLBackTrace.cpp:85)
+
+ 2: _sigtramp (in libsystem_platform.dylib) + 29
+
+ 4: amrex::FabArray<amrex::FArrayBox>::PC_local_cpu(amrex::FabArrayBase::CPC const&, amrex::FabArray<amrex::FArrayBox> const&, int, int, int, amrex::FabArrayBase::CpOp) (in main2d.gnu.ex) (AMReX_PCI.H:18)
+
+ 5: _ZN5amrex20FillPatchSingleLevelINS_8MultiFabENS_20StateDataPhysBCFunctEEENSt9enable_ifIXsrNS_10IsFabArrayIT_vEE5valueEvE4typeERS5_RKNS_7IntVectEdRKNS_6VectorIPS5_SaISE_EEERKNSD_IdSaIdEEEiiiRKNS_8GeometryERT0_i (in main2d.gnu.ex) (AMReX_FillPatchUtil_I.H:67)
+
+ 6: amrex::FillPatchIterator::FillFromLevel0(double, int, int, int, int) (in main2d.gnu.ex) (<No path>:0)
+
+ 7: amrex::FillPatchIterator::Initialize(int, double, int, int, int) (in main2d.gnu.ex) (AMReX_AmrLevel.cpp:1016)
+
+ 8: amrex::AmrLevel::FillPatch(amrex::AmrLevel&, amrex::MultiFab&, int, double, int, int, int, int) (in main2d.gnu.ex) (AMReX_AmrLevel.cpp:2113)
+
+ 9: AmrLevelAdv::advance(double, double, int, int) (in main2d.gnu.ex) (AmrLevelAdv.cpp:981)
+
+10: amrex::Amr::timeStep(int, double, int, int, double) (in main2d.gnu.ex) (<No path>:0)
+
+11: amrex::Amr::coarseTimeStep(double) (in main2d.gnu.ex) (AMReX_Amr.cpp:2127)
+
+12: main (in main2d.gnu.ex) (main.cpp:56)
+

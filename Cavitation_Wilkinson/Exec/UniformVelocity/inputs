@@ -1,0 +1,85 @@
+# ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 10000
+# fab.init_snan = 1
+
+# PROBLEM SIZE & GEOMETRY
+# NOTE - although this example is 2D, 3D data can be specified safely; the z-components are ignored
+geometry.is_periodic =  0  0  0               # Boolean flag for periodic boundaries all round
+geometry.coord_sys   =  0                     # 0 -> Cartesian geometry
+geometry.prob_lo     =  0.0   0.0   0.0         # Physical minimum extents
+
+# Test 1, 2, 3
+geometry.prob_hi     =  2.0  2.0  1.0         # Physical maximum extents
+amr.n_cell           =  5000   2   2          # Number of cells in each dimension
+
+# TIME STEP CONTROL
+adv.cfl            = 0.3      # cfl number for hyperbolic system
+
+# CONSTANT FOR SLOPE RECONSTRUCTION
+adv.sl_const       = 0
+
+# VERBOSITY - controls the number of messages output to screen
+adv.v              = 1       # verbosity in Adv
+amr.v              = 1       # verbosity in Amr (recommended, else progres of code is not output)
+
+# REFINEMENT / REGRIDDING
+amr.max_level       = 0       # maximum level number allowed
+amr.ref_ratio       = 2 2 2 2 # refinement ratio
+amr.regrid_int      = 1       # how often to regrid (number of coarse timesteps between regrid)
+amr.blocking_factor = 2       # block factor in grid generation
+amr.max_grid_size   = 16
+
+# CHECKPOINT FILES
+amr.checkpoint_files_output = 0     # 0 will disable checkpoint files
+amr.check_file              = chk   # root name of checkpoint file
+amr.check_int               = 10    # number of timesteps between checkpoints
+
+# PLOTFILES
+# NOTE - VisIt (recommended), Paraview or amrvis are needed to visualise data.  AMReX outputs boxlib format
+#        data; see lab CAMReX wiki for instructions on plotting.  Using a base name of plt ensures
+#	 visualisation knows the current cycle (iteration) as well as time - see AMReX documentation for more.
+amr.plot_files_output = 1                # 0 will disable plot files
+amr.plot_file         = advection/plt    # root name of plot file
+amr.plot_int          = 1               # number of timesteps between plot files, plot_per allows fixed timesteps
+
+# PROBIN FILENAME - This file contains AMR refinement criteria
+amr.probin_file = probin
+
+# Test 3.2: Wilkinson's mCavitation test (tried lower cfl, density of air = 10 but results still not stable)
+
+    # material specific data 
+    adv.gamma_a            = 2.2479
+    adv.pinf_a             = 1e9
+    adv.cv_a               = 2696.9
+    adv.epsinf_a           = -3.6884e6
+
+    adv.gamma_b            = 1.3247 
+    adv.pinf_b             = 0 
+    adv.cv_b               = 1419.1 
+    adv.epsinf_b           = 0
+
+    adv.p_max              = 22.064e6
+
+    # left initial data
+    alpha_al           = 0.999999999
+    rho_al             = 997.08
+    rho_bl             = 0.02288
+    vx_l               = -10.0
+    vy_l               = 0.0
+    p_l                = 100000
+
+    # right initial data
+    alpha_ar           = 0.999999999
+    rho_ar             = 997.08
+    rho_br             = 0.02288
+    vx_r               = 10.0
+    vy_r               = 0.0
+    p_r                = 100000
+
+    # simulation time
+    stop_time = 5e-3
+
+
+
+
+

@@ -1,0 +1,24 @@
+ 0: amrex::BLBackTrace::print_backtrace_info(__sFILE*) (in main2d.gnu.ex) (AMReX_BLBackTrace.cpp:175)
+
+ 1: amrex::BLBackTrace::handler(int) (in main2d.gnu.ex) (AMReX_BLBackTrace.cpp:85)
+
+ 2: amrex::FileOpenFailed(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in main2d.gnu.ex) (basic_string.h:195)
+
+ 3: amrex::VisMF::WriteHeaderDoit(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::VisMF::Header const&) (in main2d.gnu.ex) (AMReX_VisMF.cpp:879)
+
+ 4: amrex::VisMF::WriteHeader(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::VisMF::Header&, int, int) (in main2d.gnu.ex) (AMReX_VisMF.cpp:903)
+
+ 5: amrex::VisMF::Write(amrex::FabArray<amrex::FArrayBox> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::VisMF::How, bool) (in main2d.gnu.ex) (AMReX_VisMF.cpp:1107)
+
+ 6: amrex::AmrLevel::writePlotFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::ostream&, amrex::VisMF::How) (in main2d.gnu.ex) (AMReX_AmrLevel.cpp:363)
+
+ 7: AmrLevelAdv::writePlotFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::ostream&, amrex::VisMF::How) (in main2d.gnu.ex) (<No path>:0)
+
+ 8: amrex::Amr::writePlotFileDoit(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) (in main2d.gnu.ex) (AMReX_Amr.cpp:995)
+
+ 9: amrex::Amr::writePlotFile() (in main2d.gnu.ex) (<No path>:0)
+
+10: amrex::Amr::coarseTimeStep(double) (in main2d.gnu.ex) (AMReX_Amr.cpp:2315)
+
+11: main (in main2d.gnu.ex) (main.cpp:56)
+
